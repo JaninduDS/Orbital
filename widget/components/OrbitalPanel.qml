@@ -9,8 +9,10 @@ Rectangle {
     radius: Theme.radius
     border.color: Theme.surface0
     border.width: 1
+    clip: true
 
-    // Faint Schrödinger equation in the background — placed behind everything.
+    signal closeRequested()
+
     Text {
         anchors.centerIn: parent
         text: "iℏ ∂ψ/∂t = Ĥψ"
@@ -27,34 +29,65 @@ Rectangle {
         anchors.margins: Theme.pad
         spacing: Theme.gap
 
-        // Header: date + countdown
-        Text {
-            text: AppState.now.toLocaleDateString(Qt.locale(), "dddd MMM d, yyyy")
-            color: Theme.text
-            font.family: Theme.font
-            font.pixelSize: 18
-            font.weight: Font.DemiBold
+        // Header row: title block + close button
+        RowLayout {
             Layout.fillWidth: true
-        }
-        Text {
-            text: "Orbital · " + AppState.termName
-            color: Theme.subtext
-            font.family: Theme.mono
-            font.pixelSize: 11
-            Layout.fillWidth: true
+            spacing: 8
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 0
+                Text {
+                    text: AppState.now.toLocaleDateString(Qt.locale(), "dddd MMM d, yyyy")
+                    color: Theme.text
+                    font.family: Theme.font
+                    font.pixelSize: 17
+                    font.weight: Font.DemiBold
+                    elide: Text.ElideRight
+                    Layout.fillWidth: true
+                }
+                Text {
+                    text: "Orbital · " + AppState.termName
+                    color: Theme.subtext
+                    font.family: Theme.mono
+                    font.pixelSize: 10
+                    Layout.fillWidth: true
+                }
+            }
+
+            Rectangle {
+                id: closeBtn
+                Layout.preferredWidth: 22
+                Layout.preferredHeight: 22
+                radius: 11
+                color: closeMa.containsMouse ? Theme.red : Theme.surface0
+                Behavior on color { ColorAnimation { duration: 120 } }
+                Text {
+                    anchors.centerIn: parent
+                    text: "×"
+                    color: Theme.text
+                    font.family: Theme.font
+                    font.pixelSize: 16
+                    font.weight: Font.Bold
+                }
+                MouseArea {
+                    id: closeMa
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: panel.closeRequested()
+                }
+            }
         }
 
         CountdownRibbon { Layout.fillWidth: true }
 
-        // Section: Today's timeline
         SectionHeader { text: "TODAY" }
-        NowStrip { Layout.fillWidth: true; Layout.preferredHeight: 70 }
+        NowStrip { Layout.fillWidth: true; Layout.preferredHeight: 64 }
 
-        // Section: 8-week heatmap
         SectionHeader { text: "WORKLOAD" }
-        Heatmap { Layout.fillWidth: true; Layout.preferredHeight: 180 }
+        Heatmap { Layout.fillWidth: true }
 
-        // Section: upcoming tasks
         SectionHeader { text: "NEXT UP" }
         ColumnLayout {
             Layout.fillWidth: true
@@ -72,10 +105,12 @@ Rectangle {
                 color: AppState.error ? Theme.red : Theme.subtext
                 font.family: Theme.font
                 font.pixelSize: 12
+                wrapMode: Text.WordWrap
+                Layout.fillWidth: true
             }
         }
 
-        Item { Layout.fillHeight: true }   // spacer
+        Item { Layout.fillHeight: true }
         EnergyBar { Layout.fillWidth: true }
     }
 
@@ -84,6 +119,6 @@ Rectangle {
         font.family: Theme.mono
         font.pixelSize: 10
         font.letterSpacing: 1.5
-        topPadding: 6
+        topPadding: 4
     }
 }

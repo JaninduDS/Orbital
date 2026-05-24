@@ -5,14 +5,23 @@ import "."
 
 Item {
     id: heat
+
     readonly property var weeks: AppState.heatmap.weeks || []
-    readonly property int cellSize: Math.floor((width - 24) / 8)
+    readonly property int labelCol: 14
     readonly property int gap: 3
-    readonly property string todayISO: AppState.now.toISOString().slice(0,10)
+    // Fit 8 columns into available width; cap cell size so it doesn't grow huge.
+    readonly property int cellSize: Math.min(
+        28,
+        Math.floor((width - labelCol - 4 - 7 * gap) / 8)
+    )
+    readonly property string todayISO: AppState.now.toISOString().slice(0, 10)
+
+    // Drive the parent layout so it reserves enough height for 7 rows + gaps.
+    implicitHeight: 7 * cellSize + 6 * gap
+    clip: true
 
     function opacityFor(minutes) {
         if (!minutes) return 0.12;
-        // soft log scale; 480 min = saturated
         return Math.min(1.0, 0.18 + minutes / 480 * 0.82);
     }
 
@@ -21,14 +30,13 @@ Item {
         anchors.top: parent.top
         spacing: 4
 
-        // Day-of-week labels
         Column {
             spacing: heat.gap
             Repeater {
-                model: ["M","T","W","T","F","S","S"]
+                model: ["M", "T", "W", "T", "F", "S", "S"]
                 Text {
                     text: modelData
-                    width: 14
+                    width: heat.labelCol
                     height: heat.cellSize
                     color: Theme.overlay0
                     font.family: Theme.mono
@@ -39,13 +47,12 @@ Item {
             }
         }
 
-        // Week columns
         Repeater {
             model: heat.weeks
             Column {
                 spacing: heat.gap
                 Repeater {
-                    model: modelData   // 7 cells
+                    model: modelData
                     Rectangle {
                         width: heat.cellSize
                         height: heat.cellSize
@@ -55,16 +62,12 @@ Item {
                             ? Theme.priorityColor(modelData.max_priority)
                             : "transparent"
                         border.width: modelData.max_priority ? 2 : 0
-                        opacity: modelData.date === heat.todayISO ? 1.0 : 0.95
-                        scale: modelData.date === heat.todayISO ? 1.05 : 1.0
-                        Behavior on scale { NumberAnimation { duration: 200 } }
 
-                        // Pulse today's cell
                         SequentialAnimation on opacity {
                             running: modelData.date === heat.todayISO
                             loops: Animation.Infinite
-                            NumberAnimation { from: 1.0; to: 0.7; duration: 1100 }
-                            NumberAnimation { from: 0.7; to: 1.0; duration: 1100 }
+                            NumberAnimation { from: 1.0; to: 0.6; duration: 1100 }
+                            NumberAnimation { from: 0.6; to: 1.0; duration: 1100 }
                         }
 
                         ToolTip.visible: hover.containsMouse

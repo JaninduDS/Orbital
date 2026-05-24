@@ -68,6 +68,28 @@ Alarm cadence per priority (configured in `orbital/export/ics.py`):
 | normal     | 30 min before         |
 | low        | none                  |
 
+## Quickshell widget
+
+```bash
+uv run orbital export json     # generate data/state.json
+qs -p ~/orbital/widget         # opens the panel on the right edge
+```
+
+Auto-start with Hyprland — add to `~/.config/hypr/hyprland.conf`:
+```
+exec-once = qs -p ~/orbital/widget
+bind = SUPER, O, exec, qs ipc call orbital toggle   # show/hide panel
+```
+
+Or call IPC directly:
+```bash
+qs ipc call orbital toggle   # toggle visibility
+qs ipc call orbital show
+qs ipc call orbital hide
+```
+
+The widget polls `data/state.json` every 60s and reacts to file changes immediately.
+
 ## Project layout
 
 ```

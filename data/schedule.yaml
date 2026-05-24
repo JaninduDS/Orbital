@@ -1,0 +1,377 @@
+term:
+  name: "Spring 2026"
+  start: "2026-05-11T00:00:00-04:00"
+  end:   "2026-08-05T23:59:00-04:00"
+  off_days:
+    - "2026-05-18"  # Victoria Day
+    - "2026-07-01"  # Canada Day
+
+courses:
+  - code: PHYS234
+    name: "Quantum Physics 1"
+    color: "#7C3AED"   # purple
+    instructor: "Thompson"
+    textbook: "Griffiths, Intro to QM 3e"
+    lectures:
+      - day: Mon
+        start: "13:00"
+        end:   "14:20"
+        location: "AL 113"
+        online_dates: ["2026-07-06"]
+      - day: Wed
+        start: "13:00"
+        end:   "14:20"
+        location: "AL 113"
+        online_dates: ["2026-07-08"]
+
+  - code: PHYS242
+    name: "Electricity & Magnetism 1"
+    color: "#14B8A6"   # teal
+    instructor: "Mariantoni"
+    textbook: "Griffiths, Intro to Electrodynamics 4e"
+    lectures:
+      - day: Tue
+        start: "10:00"
+        end:   "11:20"
+        location: "AL 113"
+      - day: Thu
+        start: "10:00"
+        end:   "11:20"
+        location: "AL 113"
+
+  - code: PHYS260B
+    name: "Intermediate Physics Lab 2"
+    color: "#F59E0B"   # amber
+    instructor: "Crone"
+    lectures:
+      - day: Wed
+        start: "14:30"
+        end:   "17:20"
+        location: "PHY 214"
+        online_dates: ["2026-07-08"]
+
+  - code: PHYS490
+    name: "New Trends in Quantum Tech"
+    color: "#F43F5E"   # rose
+    instructor: "Muschik"
+    lectures:
+      - day: Tue
+        start: "19:00"
+        end:   "21:50"
+        location: "PHY 150"
+
+tasks:
+  # -------- PHYS 234 in-class tests --------
+  - id: phys234-test1
+    course: PHYS234
+    title: "PHYS 234 Test #1 (in class)"
+    type: exam
+    due: "2026-06-10T13:00:00-04:00"
+    weight: 4
+    priority: critical
+    estimated_minutes: 80
+    notes: "AL 113. Cumulative through pre-test material."
+
+  - id: phys234-test2
+    course: PHYS234
+    title: "PHYS 234 Test #2 (in class)"
+    type: exam
+    due: "2026-07-15T13:00:00-04:00"
+    weight: 4
+    priority: critical
+    estimated_minutes: 80
+    notes: "AL 113."
+
+  # -------- PHYS 242 midterm --------
+  - id: phys242-midterm
+    course: PHYS242
+    title: "PHYS 242 Midterm"
+    type: exam
+    due: "2026-06-16T16:00:00-04:00"
+    weight: 4
+    priority: critical
+    estimated_minutes: 120
+    notes: "In-person. Room TBD."
+
+  # -------- PHYS 490 presentation --------
+  - id: phys490-slides-submission
+    course: PHYS490
+    title: "Submit presentation slides + 1-page summary"
+    type: presentation_prep
+    due: "2026-07-14T23:59:00-04:00"
+    weight: 4
+    priority: critical
+    estimated_minutes: 120
+    notes: "Due 11:59 PM Tuesday before presenting (July 21)."
+
+  - id: phys490-presentation
+    course: PHYS490
+    title: "Deliver PHYS 490 presentation"
+    type: presentation_prep
+    due: "2026-07-21T19:00:00-04:00"
+    weight: 4
+    priority: critical
+    estimated_minutes: 60
+    notes: "PHY 150 during seminar slot."
+
+  # Prep blocks: 5 × 3h sessions over the two weeks leading up to slide submission (Jul 14)
+  - id: phys490-prep-1
+    course: PHYS490
+    title: "Presentation prep: topic & outline"
+    type: presentation_prep
+    due: "2026-07-01T18:00:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 180
+  - id: phys490-prep-2
+    course: PHYS490
+    title: "Presentation prep: literature dive"
+    type: presentation_prep
+    due: "2026-07-04T18:00:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 180
+  - id: phys490-prep-3
+    course: PHYS490
+    title: "Presentation prep: slide draft"
+    type: presentation_prep
+    due: "2026-07-08T18:00:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 180
+  - id: phys490-prep-4
+    course: PHYS490
+    title: "Presentation prep: 1-page summary + rehearsal"
+    type: presentation_prep
+    due: "2026-07-11T18:00:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 180
+  - id: phys490-prep-5
+    course: PHYS490
+    title: "Presentation prep: final polish"
+    type: presentation_prep
+    due: "2026-07-13T20:00:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 180
+
+  # -------- Recurring: PHYS 490 weekly engagement form (Mon noon) --------
+  - id: phys490-engagement
+    course: PHYS490
+    title: "PHYS 490 engagement form"
+    type: engagement
+    weight: 2
+    priority: high
+    estimated_minutes: 60
+    notes: "Read 3 sets of slides released Wed morning, submit Google Form."
+    recurring:
+      day: Mon
+      time: "12:00"
+      start: "2026-05-25T12:00:00-04:00"
+      until: "2026-08-03T12:00:00-04:00"
+
+  # -------- Recurring: PHYS 260B lab prep (Tue evening before Wed lab) --------
+  - id: phys260b-lab-prep
+    course: PHYS260B
+    title: "PHYS 260B lab prep + pre-lab reading"
+    type: lab
+    weight: 2
+    priority: normal
+    estimated_minutes: 90
+    recurring:
+      day: Tue
+      time: "18:00"
+      until: "2026-08-04T18:00:00-04:00"
+
+  # -------- Recurring: Sunday reading blocks --------
+  - id: phys234-reading
+    course: PHYS234
+    title: "Griffiths QM reading (chapter ahead)"
+    type: reading
+    weight: 2
+    priority: normal
+    estimated_minutes: 90
+    recurring:
+      day: Sun
+      time: "14:00"
+      until: "2026-08-02T14:00:00-04:00"
+
+  - id: phys242-reading
+    course: PHYS242
+    title: "Griffiths E&D reading (chapter ahead)"
+    type: reading
+    weight: 2
+    priority: normal
+    estimated_minutes: 90
+    recurring:
+      day: Sun
+      time: "16:00"
+      until: "2026-08-02T16:00:00-04:00"
+
+  # -------- PHYS 234 assignments (5 pass/fail via LEARN, ~6.5h each, Fridays) --------
+  - id: phys234-a1
+    course: PHYS234
+    title: "PHYS 234 Assignment 1 (LEARN)"
+    type: assignment
+    due: "2026-05-29T23:59:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 390
+  - id: phys234-a2
+    course: PHYS234
+    title: "PHYS 234 Assignment 2 (LEARN)"
+    type: assignment
+    due: "2026-06-19T23:59:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 390
+  - id: phys234-a3
+    course: PHYS234
+    title: "PHYS 234 Assignment 3 (LEARN)"
+    type: assignment
+    due: "2026-07-03T23:59:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 390
+  - id: phys234-a4
+    course: PHYS234
+    title: "PHYS 234 Assignment 4 (LEARN)"
+    type: assignment
+    due: "2026-07-24T23:59:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 390
+  - id: phys234-a5
+    course: PHYS234
+    title: "PHYS 234 Assignment 5 (LEARN)"
+    type: assignment
+    due: "2026-08-03T23:59:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 390
+
+  # -------- PHYS 242 assignments (assumed 6 on Crowdmark, ~6.5h each, Fridays) --------
+  - id: phys242-a1
+    course: PHYS242
+    title: "PHYS 242 Assignment 1 (Crowdmark)"
+    type: assignment
+    due: "2026-05-22T23:59:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 390
+  - id: phys242-a2
+    course: PHYS242
+    title: "PHYS 242 Assignment 2 (Crowdmark)"
+    type: assignment
+    due: "2026-06-05T23:59:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 390
+  - id: phys242-a3
+    course: PHYS242
+    title: "PHYS 242 Assignment 3 (Crowdmark)"
+    type: assignment
+    due: "2026-06-26T23:59:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 390
+  - id: phys242-a4
+    course: PHYS242
+    title: "PHYS 242 Assignment 4 (Crowdmark)"
+    type: assignment
+    due: "2026-07-10T23:59:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 390
+  - id: phys242-a5
+    course: PHYS242
+    title: "PHYS 242 Assignment 5 (Crowdmark)"
+    type: assignment
+    due: "2026-07-24T23:59:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 390
+  - id: phys242-a6
+    course: PHYS242
+    title: "PHYS 242 Assignment 6 (Crowdmark)"
+    type: assignment
+    due: "2026-07-31T23:59:00-04:00"
+    weight: 3
+    priority: high
+    estimated_minutes: 390
+
+  # -------- Recurring: PHYS 260B post-lab report (due Mon 23:59 after Wed lab) --------
+  - id: phys260b-lab-report
+    course: PHYS260B
+    title: "PHYS 260B post-lab report"
+    type: lab
+    weight: 3
+    priority: high
+    estimated_minutes: 180
+    notes: "Writeup for previous Wednesday's lab."
+    recurring:
+      day: Mon
+      time: "23:59"
+      start: "2026-05-18T23:59:00-04:00"  # first lab is May 13 → first report due May 18, but that's off — May 25
+      until: "2026-08-03T23:59:00-04:00"
+
+  # -------- Recurring: post-lecture review blocks (60min each, evening) --------
+  - id: phys234-review-mon
+    course: PHYS234
+    title: "PHYS 234 lecture review"
+    type: reading
+    weight: 1
+    priority: normal
+    estimated_minutes: 60
+    notes: "Review today's QM lecture content."
+    recurring:
+      day: Mon
+      time: "20:00"
+      until: "2026-08-03T20:00:00-04:00"
+  - id: phys234-review-wed
+    course: PHYS234
+    title: "PHYS 234 lecture review"
+    type: reading
+    weight: 1
+    priority: normal
+    estimated_minutes: 60
+    recurring:
+      day: Wed
+      time: "20:00"
+      until: "2026-08-05T20:00:00-04:00"
+  - id: phys242-review-tue
+    course: PHYS242
+    title: "PHYS 242 lecture review"
+    type: reading
+    weight: 1
+    priority: normal
+    estimated_minutes: 60
+    notes: "Review today's E&M lecture content."
+    recurring:
+      day: Tue
+      time: "16:00"
+      until: "2026-08-04T16:00:00-04:00"
+  - id: phys242-review-thu
+    course: PHYS242
+    title: "PHYS 242 lecture review"
+    type: reading
+    weight: 1
+    priority: normal
+    estimated_minutes: 60
+    recurring:
+      day: Thu
+      time: "16:00"
+      until: "2026-07-30T16:00:00-04:00"
+  - id: phys490-review
+    course: PHYS490
+    title: "PHYS 490 seminar notes review"
+    type: reading
+    weight: 1
+    priority: normal
+    estimated_minutes: 45
+    notes: "Consolidate notes from tonight's seminar."
+    recurring:
+      day: Wed
+      time: "09:00"
+      until: "2026-08-05T09:00:00-04:00"

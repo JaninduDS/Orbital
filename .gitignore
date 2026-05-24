@@ -1,0 +1,11 @@
+__pycache__/
+*.py[oc]
+.venv/
+build/
+dist/
+wheels/
+*.egg-info
+.pytest_cache/
+
+data/state.json
+# data/calendar.ics is committed so iOS can subscribe via raw URL
